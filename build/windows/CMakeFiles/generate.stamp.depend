@@ -1,0 +1,20 @@
+# CMake generation dependency list for this directory.
+D:/FlutterCode/happymovie/build/windows/CMakeFiles/3.22.22022201-MSVC_2/CMakeCXXCompiler.cmake
+D:/FlutterCode/happymovie/build/windows/CMakeFiles/3.22.22022201-MSVC_2/CMakeRCCompiler.cmake
+D:/FlutterCode/happymovie/build/windows/CMakeFiles/3.22.22022201-MSVC_2/CMakeSystem.cmake
+D:/FlutterCode/happymovie/windows/CMakeLists.txt
+D:/FlutterCode/happymovie/windows/flutter/generated_plugins.cmake
+D:/Microsoft Visual Studio/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.22/Modules/CMakeCXXInformation.cmake
+D:/Microsoft Visual Studio/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake
+D:/Microsoft Visual Studio/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.22/Modules/CMakeGenericSystem.cmake
+D:/Microsoft Visual Studio/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake
+D:/Microsoft Visual Studio/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake
+D:/Microsoft Visual Studio/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.22/Modules/CMakeRCInformation.cmake
+D:/Microsoft Visual Studio/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake
+D:/Microsoft Visual Studio/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake
+D:/Microsoft Visual Studio/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake
+D:/Microsoft Visual Studio/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.22/Modules/Compiler/MSVC-CXX.cmake
+D:/Microsoft Visual Studio/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.22/Modules/Platform/Windows-MSVC-CXX.cmake
+D:/Microsoft Visual Studio/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.22/Modules/Platform/Windows-MSVC.cmake
+D:/Microsoft Visual Studio/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.22/Modules/Platform/Windows.cmake
+D:/Microsoft Visual Studio/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.22/Modules/Platform/WindowsPaths.cmake
