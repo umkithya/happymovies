@@ -1,0 +1,63 @@
+@baseurl  =  http://localhost:3000
+@url=  http://localhost:3001
+
+//============================================== getotp
+###
+POST {{url}}/api/users/getotp/
+Content-Type: application/json
+Accept: application/json
+
+{
+     "username": "umkithya@gmail.com" 
+}
+//============================================== verify
+###
+POST {{baseurl}}/api/v1/customer/verify/
+Content-Type: application/json
+Accept: application/json
+
+{
+    "phone": "+855964776129",
+    "otp": "655153",
+    "channel": "sms"
+}
+//============================================== signup
+###
+POST {{url}}/api/v1/customer/signup/
+Content-Type: application/json
+Accept: application/json
+
+{
+    "password": "a12345",
+    "username": "+85599994334",
+      "phone": "+85599994334"
+    
+}
+
+//============================================== Guess Login
+###
+GET  {{baseurl}}/api/v1/customer/guestmode/
+Content-Type: application/json
+Accept: application/json
+
+//============================================== login
+###
+POST {{baseurl}}/api/v1/customer/login/
+Content-Type: application/json
+Accept: application/json
+
+{
+    // "username": "+85599994334",
+    "username": "+85599994334",
+    "password": "a12345"
+}
+//====================================notifcation user
+
+###
+POST {{baseurl}}/api/v1/user-fcmd/
+Content-Type: application/json
+Accept: application/json
+Authorization: 
+{
+    "registration_id": ""
+}

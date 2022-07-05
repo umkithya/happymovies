@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "880612322185",
+    "project_id": "movie-api-90973",
+    "storage_bucket": "movie-api-90973.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:880612322185:android:391b6604e1ea3ad60ecf58",
+        "android_client_info": {
+          "package_name": "com.example.happymovie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "880612322185-6oh9k09gm4s755lqifmvqjsumift2qfk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCMM6Jj6KobWwi2nU8UKwxDYG9gCnbkmg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "880612322185-6oh9k09gm4s755lqifmvqjsumift2qfk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
