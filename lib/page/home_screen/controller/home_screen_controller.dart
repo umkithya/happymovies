@@ -63,8 +63,8 @@ class HomeScreenController extends GetxController {
       cid: 7,
       title: 'Fantacy',
       imgUrl:
-          'https://media.newyorker.com/photos/590973d01c7a8e33fb38f206/master/pass/Lepore-Nat-Turner-film-Sundance.jpg',
-      color: Colors.black.withOpacity(0.8),
+          'https://heavy.com/wp-content/uploads/2019/04/king-kong.jpg?quality=65&strip=all&w=780',
+      color: Colors.deepPurple.withOpacity(0.8),
     ),
   ];
   var languageList = <LanguageModel>[
@@ -183,7 +183,7 @@ class HomeScreenController extends GetxController {
         movieName: 'Money Heist: Korea'),
     const MoviesModel(
         imageUrl:
-            'https://cdn.europosters.eu/image/750/posters/stranger-things-one-sheet-season-2-i67844.jpg',
+            'https://www.crew-united.com/Media/Images/759/759739/759739.entity.jpg',
         thumbnailUrl:
             'https://media.pitchfork.com/photos/620e81cad8bc62857b465cc3/2:1/w_2560%2Cc_limit/Stranger-Things-Season-4.jpg',
         rate: 8.6,

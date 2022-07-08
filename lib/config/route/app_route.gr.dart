@@ -95,7 +95,7 @@ class AppRouter extends _i5.RootStackRouter {
     },
     MoviesRankRoute.name: (routeData) {
       return _i5.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i12.MoviesRankPage());
+          routeData: routeData, child: _i12.MoviesRankPage());
     }
   };
 

@@ -58,6 +58,8 @@ dependencies:
   jiffy: ^5.0.0
   cloud_firestore: ^3.2.1
   firebase_core: ^1.19.1
+  cached_network_image: ^3.2.1
+  flutter_cache_manager: ^3.3.0
 
 dev_dependencies:
   auto_route_generator: ^4.2.0

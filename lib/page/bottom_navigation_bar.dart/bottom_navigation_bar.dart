@@ -44,8 +44,10 @@ class ButtomNavigationBar extends StatelessWidget {
               Icon(CupertinoIcons.person_alt_circle,
                   size: 30, color: Colors.white),
             ],
-            onTap: (index) {
+            onTap: (index) async {
               //Handle button tap
+              // await DefaultCacheManager().emptyCache();
+              debugPrint('index:$index');
               tabsRouter.setActiveIndex(index);
             },
           ),

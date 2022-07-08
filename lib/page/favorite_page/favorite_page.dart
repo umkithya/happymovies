@@ -10,7 +10,7 @@ class FavoritePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _homeController = Get.put(HomeScreenController());
+    final homeController = Get.put(HomeScreenController());
 
     return Scaffold(
       backgroundColor: const Color(0xFF141414),
@@ -43,11 +43,11 @@ class FavoritePage extends StatelessWidget {
               padding:
                   const EdgeInsets.only(top: 13, bottom: 0, left: 15, right: 0),
               child: SizedBox(
-                height: 200,
+                height: 280,
                 child: ListView(
                   // physics: const NeverScrollableScrollPhysics(),
                   scrollDirection: Axis.horizontal,
-                  children: _homeController.popularMovieHomeList
+                  children: homeController.popularMovieHomeList
                       .map((e) => CustomMovieCard(
                             hideFav: false,
                             imgUrl: e.imageUrl,
@@ -84,11 +84,11 @@ class FavoritePage extends StatelessWidget {
               padding: const EdgeInsets.only(
                   top: 13, bottom: 50, left: 15, right: 0),
               child: SizedBox(
-                height: 200,
+                height: 280,
                 child: ListView(
                   // physics: const NeverScrollableScrollPhysics(),
                   scrollDirection: Axis.horizontal,
-                  children: _homeController.popularMovieHomeList
+                  children: homeController.popularMovieHomeList
                       .map((e) => CustomMovieCard(
                             hideFav: false,
                             imgUrl: e.imageUrl,

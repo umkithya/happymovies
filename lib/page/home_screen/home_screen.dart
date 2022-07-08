@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -36,26 +37,32 @@ class HomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 60, left: 0, right: 0),
                   child: Stack(
                     children: [
-                      Image.network(
-                        'https://poetryschool.com/assets/uploads/2014/12/PosterCollage.jpg',
+                      CachedNetworkImage(
+                        imageUrl:
+                            'https://poetryschool.com/assets/uploads/2014/12/PosterCollage.jpg',
                         fit: BoxFit.cover,
-                        height: 200,
+                        height: 300,
                         width: double.infinity,
+                        progressIndicatorBuilder:
+                            (context, url, downloadProgress) =>
+                                const ShimmerBox(height: 200),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
                       ),
                       Container(
-                        height: 200,
+                        height: 300,
                         decoration: BoxDecoration(
                             color: Colors.white,
                             gradient: LinearGradient(
                                 begin: FractionalOffset.topCenter,
                                 end: FractionalOffset.bottomCenter,
                                 colors: [
-                                  Colors.black.withOpacity(0.4),
+                                  Colors.black.withOpacity(0.2),
                                   const Color(0xFF141414),
                                 ],
                                 stops: const [
-                                  0.0,
-                                  1.0
+                                  0.3,
+                                  1.5
                                 ])),
                       ),
                       GestureDetector(
@@ -63,7 +70,7 @@ class HomeScreen extends StatelessWidget {
                           homeController.addMovieDetail();
                         },
                         child: const Padding(
-                          padding: EdgeInsets.only(left: 15),
+                          padding: EdgeInsets.only(left: 20, top: 0),
                           child: Text(
                             'Upcoming',
                             style: TextStyle(
@@ -80,35 +87,23 @@ class HomeScreen extends StatelessWidget {
                         child: CarouselSlider(
                             carouselController: controller,
                             items: homeController.homeImageSliderList
-                                .map((e) => Center(
+                                .map((e) => Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 15),
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(10),
-                                        child: Image.network(
-                                          e,
+                                        child: CachedNetworkImage(
+                                          imageUrl: e,
                                           fit: BoxFit.fill,
-                                          loadingBuilder: (BuildContext context,
-                                              Widget child,
-                                              ImageChunkEvent?
-                                                  loadingProgress) {
-                                            if (loadingProgress == null) {
-                                              return child;
-                                            }
-                                            return loadingProgress
-                                                        .expectedTotalBytes !=
-                                                    null
-                                                ? ShimmerBox(
-                                                    height: 120,
-                                                    width: 380,
-                                                    isColor: true,
-                                                    color: Colors.red[100],
-                                                    baseColor: Colors.grey[400],
-                                                    highlightColor:
-                                                        Colors.white,
-                                                    radius: 10,
-                                                  )
-                                                : Container();
-                                          },
-                                          width: 350,
+                                          width: double.infinity,
+                                          maxHeightDiskCache: 200,
+                                          progressIndicatorBuilder: (context,
+                                                  url, downloadProgress) =>
+                                              const ShimmerBox(
+                                            height: 200,
+                                          ),
+                                          errorWidget: (context, url, error) =>
+                                              const Icon(Icons.error),
                                         ),
                                       ),
                                     ))
@@ -118,7 +113,7 @@ class HomeScreen extends StatelessWidget {
                                   (index, carouselPageChangedReason) {
                                 homeController.activeIndex.value = index;
                               },
-                              height: 120,
+                              height: 200,
                               clipBehavior: Clip.antiAliasWithSaveLayer,
                               initialPage: 0,
                               enlargeCenterPage: true,
@@ -132,7 +127,7 @@ class HomeScreen extends StatelessWidget {
                         top: 0,
                         left: 0,
                         right: 0,
-                        bottom: 20,
+                        bottom: 40,
                         child: Align(
                           alignment: Alignment.bottomCenter,
                           child: AnimatedSmoothIndicator(
@@ -142,8 +137,8 @@ class HomeScreen extends StatelessWidget {
                             effect: const ScrollingDotsEffect(
                                 spacing: 5,
                                 radius: 0,
-                                dotWidth: 15,
-                                dotHeight: 3.5,
+                                dotWidth: 20,
+                                dotHeight: 5,
                                 //paintStyle: PaintingStyle.stroke,
                                 strokeWidth: 1.5,
                                 dotColor: Color(0xFF555555),
@@ -162,7 +157,7 @@ class HomeScreen extends StatelessWidget {
 
                 //category card
                 Padding(
-                  padding: const EdgeInsets.only(top: 8, left: 10, right: 0),
+                  padding: const EdgeInsets.only(top: 8, left: 0, right: 0),
                   child: SizedBox(
                     height: 50,
                     child: ListView(
@@ -188,32 +183,29 @@ class HomeScreen extends StatelessWidget {
                 ),
                 //ads banner
                 Padding(
-                  padding: const EdgeInsets.only(top: 12, left: 5, right: 5),
+                  padding: const EdgeInsets.only(top: 30, left: 5, right: 5),
                   child: SizedBox(
                     height: 55,
                     width: double.infinity,
-                    child: Image.network(
-                        'https://static.semrush.com/blog/uploads/media/b6/02/b602c34e9b6809d22b00dfa142c9dfc4/7jLg9zyEKiXwwW5K8BgLDrO7UdI24Sr1wlOZ9fu_AEbl7B2NM9jiEuSyPAAaokLR4AUBMmAn43WOm4-N4peDkFVBQDdNl_xrArlAa3Mx6guZTOmppZpCTXIv56BRWceDkrCndwYp%3Ds0.png',
-                        fit: BoxFit.cover, loadingBuilder:
-                            (BuildContext context, Widget child,
-                                ImageChunkEvent? loadingProgress) {
-                      if (loadingProgress == null) return child;
-                      return loadingProgress.expectedTotalBytes != null
-                          ? ShimmerBox(
-                              height: 55,
-                              isColor: true,
-                              color: Colors.red[100],
-                              baseColor: Colors.grey[400],
-                              highlightColor: Colors.white,
-                              radius: 10,
-                            )
-                          : Container();
-                    }),
+                    child: CachedNetworkImage(
+                      imageUrl:
+                          'https://www.whatisthematrix.com/assets/images/desktopbanner.jpg',
+                      fit: BoxFit.cover,
+                      // memCacheHeight: 400,
+                      // memCacheWidth: 300,
+                      maxHeightDiskCache: 200,
+                      progressIndicatorBuilder:
+                          (context, url, downloadProgress) => const ShimmerBox(
+                        height: 55,
+                      ),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                    ),
                   ),
                 ),
                 //popular title:
                 Padding(
-                  padding: const EdgeInsets.only(top: 10, left: 15, right: 20),
+                  padding: const EdgeInsets.only(top: 40, left: 20, right: 20),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -243,9 +235,9 @@ class HomeScreen extends StatelessWidget {
                 //popular movie card show
                 Padding(
                   padding: const EdgeInsets.only(
-                      top: 13, bottom: 0, left: 15, right: 0),
+                      top: 30, bottom: 0, left: 20, right: 0),
                   child: SizedBox(
-                    height: 200,
+                    height: 280,
                     child: StreamBuilder<List<MoviesModel>>(
                         stream: homeController.readMovie(),
                         builder: (context, snapshot) {
@@ -281,7 +273,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 //Tv show label
                 Padding(
-                  padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+                  padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
@@ -305,9 +297,9 @@ class HomeScreen extends StatelessWidget {
                 //tvshow movie card show
                 Padding(
                   padding: const EdgeInsets.only(
-                      top: 13, bottom: 10, left: 20, right: 0),
+                      top: 30, bottom: 10, left: 20, right: 0),
                   child: SizedBox(
-                    height: 200,
+                    height: 280,
                     child: ListView(
                       // physics: const NeverScrollableScrollPhysics(),
                       scrollDirection: Axis.horizontal,
@@ -325,15 +317,15 @@ class HomeScreen extends StatelessWidget {
                 //language card
                 Padding(
                   padding: const EdgeInsets.only(
-                      top: 8, left: 15, bottom: 10, right: 0),
+                      top: 50, left: 0, bottom: 10, right: 0),
                   child: SizedBox(
-                    height: 30,
+                    height: 45,
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       children: homeController.languageList
                           .map((e) => customCategoryCard(
                               isUnHideImage: false,
-                              height: 30,
+                              height: 45,
                               color: e.color,
                               onTap: () {},
                               text: e.title,
@@ -347,7 +339,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 //Khmer label
                 Padding(
-                  padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+                  padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
@@ -369,10 +361,9 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding:
-                      const EdgeInsets.only(top: 20, bottom: 100, left: 20),
+                  padding: const EdgeInsets.only(top: 30, bottom: 80, left: 20),
                   child: SizedBox(
-                    height: 200,
+                    height: 280,
                     child: ListView(
                       // physics: const NeverScrollableScrollPhysics(),
                       scrollDirection: Axis.horizontal,
@@ -435,36 +426,35 @@ class CustomMovieCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 15),
+      padding: const EdgeInsets.only(right: 20),
       child: SizedBox(
-        width: 100,
+        width: 150,
         child: Stack(
           children: [
             Stack(
               children: [
                 SizedBox(
-                  height: 150,
-                  width: 100,
+                  height: 230,
+                  width: 150,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
-                    child: Image.network(
-                      '$imgUrl',
+                    child: CachedNetworkImage(
+                      imageUrl: '$imgUrl',
                       fit: BoxFit.fill,
-                      loadingBuilder: (BuildContext context, Widget child,
-                          ImageChunkEvent? loadingProgress) {
-                        if (loadingProgress == null) return child;
-                        return loadingProgress.expectedTotalBytes != null
-                            ? ShimmerBox(
-                                height: 150,
-                                width: 100,
-                                isColor: true,
-                                color: Colors.red[100],
-                                baseColor: Colors.grey[400],
-                                highlightColor: Colors.white,
-                                radius: 10,
-                              )
-                            : Container();
-                      },
+                      memCacheHeight: 300,
+                      memCacheWidth: 300,
+                      progressIndicatorBuilder:
+                          (context, url, downloadProgress) => ShimmerBox(
+                        height: 150,
+                        width: 100,
+                        isColor: true,
+                        color: Colors.red[100],
+                        baseColor: Colors.grey[400],
+                        highlightColor: Colors.white,
+                        radius: 10,
+                      ),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
                     ),
                   ),
                 ),
@@ -488,31 +478,31 @@ class CustomMovieCard extends StatelessWidget {
               ],
             ),
             Positioned(
-                bottom: 18,
+                bottom: 20,
                 child: SizedBox(
-                  width: 100,
+                  width: 150,
                   height: 22,
                   child: AutoSizeText(
                     title ?? '',
                     style: const TextStyle(
-                        fontSize: 12,
+                        fontSize: 16,
                         fontWeight: FontWeight.w700,
                         color: Colors.white),
-                    minFontSize: 10,
-                    maxLines: 2,
+                    minFontSize: 14,
+                    maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                 )),
             Positioned(
-              bottom: 4,
+              bottom: 0,
               child: SizedBox(
-                width: 100,
+                width: 150,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     RatingBar.builder(
                       ignoreGestures: true,
-                      itemSize: 14,
+                      itemSize: 16,
                       initialRating: rate! / 2.3,
                       minRating: 1,
                       direction: Axis.horizontal,
@@ -532,7 +522,10 @@ class CustomMovieCard extends StatelessWidget {
                     ),
                     Text(
                       '$rate',
-                      style: const TextStyle(color: Colors.amber, fontSize: 12),
+                      style: const TextStyle(
+                          color: Colors.amber,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500),
                     )
                   ],
                 ),
@@ -573,41 +566,47 @@ Widget customCategoryCard(
     bool? isUnHideImage = true,
     TextStyle? textStyle}) {
   return Padding(
-    padding: const EdgeInsets.only(left: 0, right: 15),
+    padding: const EdgeInsets.only(left: 20, right: 0),
     child: GestureDetector(
       onTap: onTap,
       child: Container(
         width: width,
         height: height,
-        decoration:
-            BoxDecoration(color: color, borderRadius: BorderRadius.circular(8)),
+        decoration: isUnHideImage! != true
+            ? BoxDecoration(
+                color: color, borderRadius: BorderRadius.circular(8))
+            : null,
         child: Stack(
           children: [
             Visibility(
-              visible: isUnHideImage!,
-              child: Container(
+              visible: isUnHideImage,
+              child: SizedBox(
                 width: width,
                 height: height,
-                decoration: const BoxDecoration(color: Colors.white),
-                child: Image.network('$imgUrl',
+                // decoration: const BoxDecoration(color: Colors.white),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: CachedNetworkImage(
+                    imageUrl: '$imgUrl',
                     fit: BoxFit.fill,
                     color: color,
-                    colorBlendMode: BlendMode.color, loadingBuilder:
-                        (BuildContext context, Widget child,
-                            ImageChunkEvent? loadingProgress) {
-                  if (loadingProgress == null) return child;
-                  return loadingProgress.expectedTotalBytes != null
-                      ? ShimmerBox(
-                          height: width,
-                          width: height,
-                          isColor: true,
-                          color: Colors.red[100],
-                          baseColor: Colors.grey[400],
-                          highlightColor: Colors.white,
-                          radius: 10,
-                        )
-                      : Container();
-                }),
+                    memCacheHeight: 100,
+                    width: 50,
+                    colorBlendMode: BlendMode.color,
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) => ShimmerBox(
+                      height: width,
+                      width: height,
+                      isColor: true,
+                      color: Colors.red[100],
+                      baseColor: Colors.grey[400],
+                      highlightColor: Colors.white,
+                      radius: 10,
+                    ),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                  ),
+                ),
               ),
             ),
             Align(

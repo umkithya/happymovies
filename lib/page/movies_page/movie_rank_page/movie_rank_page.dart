@@ -1,20 +1,19 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import 'package:get/get_navigation/src/routes/default_transitions.dart';
 
-import '../../../config/route/app_route.gr.dart';
 import '../../../widgets/appbar/custom_app_bar.dart';
+import '../../../widgets/custom_shimmer_box/custom_shimmer_box.dart';
 import '../../home_screen/controller/home_screen_controller.dart';
 
 class MoviesRankPage extends StatelessWidget {
-  const MoviesRankPage({Key? key}) : super(key: key);
-
+  MoviesRankPage({Key? key}) : super(key: key);
+  final homeController = Get.put(HomeScreenController());
   @override
   Widget build(BuildContext context) {
-    final _homeController = Get.put(HomeScreenController());
-
     return Scaffold(
       backgroundColor: const Color(0xFF1B1B1B),
       appBar: customAppBar(
@@ -28,14 +27,16 @@ class MoviesRankPage extends StatelessWidget {
       body: GridView(
         padding: const EdgeInsets.only(left: 20, right: 0, top: 20, bottom: 30),
         shrinkWrap: true,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          // childAspectRatio: 0.5,
-          crossAxisSpacing: 0.0,
-          childAspectRatio: 117 / 200,
-          mainAxisSpacing: 10.0,
-        ),
-        children: _homeController.languageMovieHomeList
+        gridDelegate:
+            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1),
+        // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        //   // crossAxisCount: 3,
+        //   // // childAspectRatio: 0.5,
+        //   // crossAxisSpacing: 0.0,
+        //   // childAspectRatio: 117 / 200,
+        //   // mainAxisSpacing: 10.0,
+        // ),
+        children: homeController.languageMovieHomeList
             .map((e) => SizedBox(
                   height: 200,
                   child: CustomMovieCard(
@@ -71,21 +72,28 @@ class CustomMovieCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 0),
+      padding: const EdgeInsets.only(right: 20),
       child: SizedBox(
-        width: 100,
+        width: 200,
         child: Stack(
           children: [
             GestureDetector(
               onTap: onTap,
               child: SizedBox(
-                height: 150,
-                width: 100,
+                height: 180,
+                width: 200,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: Image.network(
-                    '$imgUrl',
-                    fit: BoxFit.fill,
+                  child: CachedNetworkImage(
+                    imageUrl: '$imgUrl',
+                    fit: BoxFit.cover,
+                    maxHeightDiskCache: 250,
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) => const ShimmerBox(
+                            // height: 150,
+                            ),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   ),
                 ),
               ),
@@ -109,9 +117,9 @@ class CustomMovieCard extends StatelessWidget {
             Positioned(
               bottom: 4,
               left: 0,
-              right: 15,
+              right: 2,
               child: SizedBox(
-                width: 100,
+                width: 200,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

@@ -60,22 +60,36 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF252525),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Image.asset(
-              'asset/logo.png',
-              height: 300,
+      backgroundColor: const Color(0xFF222B33),
+      body: Stack(
+        children: [
+          // SizedBox(
+          //   height: MediaQuery.of(context).size.height,
+          //   width: MediaQuery.of(context).size.width,
+          //   child: const Image(
+          //     image: AssetImage('asset/background.jpg'),
+          //     fit: BoxFit.cover,
+          //     // filterQuality: FilterQuality.low,
+          //   ),
+          // ),
+
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'asset/logo.png',
+                  height: 300,
+                ),
+                LoadingAnimationWidget.halfTriangleDot(
+                  color: const Color.fromARGB(255, 255, 189, 45),
+                  size: 40,
+                ),
+              ],
             ),
-            LoadingAnimationWidget.halfTriangleDot(
-              color: const Color.fromARGB(255, 255, 189, 45),
-              size: 40,
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

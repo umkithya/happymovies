@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
@@ -17,14 +18,14 @@ class VideoDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _homeController = Get.put(HomeScreenController());
+    final homeController = Get.put(HomeScreenController());
     var a = 0;
 
     return Scaffold(
       backgroundColor: const Color(0xFF141414),
       body: SingleChildScrollView(
         child: SizedBox(
-          height: a == 1 ? 820 : 730,
+          height: a == 1 ? 900 : 900,
           width: double.infinity,
           child: Stack(
             children: [
@@ -32,7 +33,7 @@ class VideoDetail extends StatelessWidget {
               customBackImg(moviesModel!.imageUrl!),
               Positioned(
                 left: 20,
-                top: 60,
+                top: 80,
                 child: customMovieBannerV2(
                   urlAsset: moviesModel!.imageUrl!,
                   movieDate: moviesModel!.releaseDate,
@@ -42,7 +43,7 @@ class VideoDetail extends StatelessWidget {
               ),
               //CategoryCardLabel
               Positioned(
-                right: 30,
+                left: 200,
                 top: 325,
                 child: Row(
                     children: moviesModel!.categories!
@@ -52,7 +53,7 @@ class VideoDetail extends StatelessWidget {
               //Overview
               Positioned(
                 right: 20,
-                top: 370,
+                top: 400,
                 left: 20,
                 child: Column(
                   children: [
@@ -65,7 +66,7 @@ class VideoDetail extends StatelessWidget {
 
                     Padding(
                       padding: const EdgeInsets.only(
-                        top: 20,
+                        top: 30,
                       ),
                       child: SizedBox(
                         height: 30,
@@ -94,13 +95,13 @@ class VideoDetail extends StatelessWidget {
 
                     Padding(
                       padding: const EdgeInsets.only(
-                          top: 13, bottom: 0, left: 0, right: 0),
+                          top: 20, bottom: 0, left: 0, right: 0),
                       child: SizedBox(
-                        height: 200,
+                        height: 280,
                         child: ListView(
                           // physics: const NeverScrollableScrollPhysics(),
                           scrollDirection: Axis.horizontal,
-                          children: _homeController.popularMovieHomeList
+                          children: homeController.popularMovieHomeList
                               .map((e) => CustomMovieCard(
                                     imgUrl: e.imageUrl,
                                     rate: e.rate,
@@ -153,8 +154,8 @@ class VideoDetail extends StatelessWidget {
                             .map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
-                            child: Text(value),
                             alignment: AlignmentDirectional.center,
+                            child: Text(value),
                           );
                         }).toList(),
                       )
@@ -172,7 +173,7 @@ class VideoDetail extends StatelessWidget {
                     child: ListView(
                       // physics: const NeverScrollableScrollPhysics(),
                       scrollDirection: Axis.horizontal,
-                      children: _homeController.episodeList
+                      children: homeController.episodeList
                           .map((e) => customCategoryCard(
                               isUnHideImage: false,
                               height: 30,
@@ -213,43 +214,30 @@ class VideoDetail extends StatelessWidget {
               // ),
               //play btn
               Positioned(
-                right: 60,
+                right: 80,
                 top: 160,
                 child: GestureDetector(
-                  onTap: () {
-                    // AutoRouter.of(context).popAndPush(
-                    //   VideoDetailRouter(children: [
-                    //     VideoPlayerRoute(moviesModel: moviesModel!)
-                    //   ]),
-                    // );VideoPlayerRoute
-                    // AutoRouter.of(context)
-                    //     .popAndPush(ButtomNavigationBarRouter(children: [
-                    //   HomeRoute(children: [
-                    //     VideoDetailRouter(moviesModel: moviesModel!)
-                    //   ])
-                    // ]));
-                    AutoRouter.of(context)
-                        .push(VideoPlayerRouter(moviesModel: moviesModel!));
-                  },
-                  child: Stack(
-                    children: [
-                      Container(
-                        height: 80,
-                        width: 80,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(60)),
-                      ),
-                      const Center(
-                        child: Icon(
-                          Icons.play_circle_outline,
-                          color: Color(0xFFF44336),
-                          size: 80,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                    onTap: () {
+                      // AutoRouter.of(context).popAndPush(
+                      //   VideoDetailRouter(children: [
+                      //     VideoPlayerRoute(moviesModel: moviesModel!)
+                      //   ]),
+                      // );VideoPlayerRoute
+                      // AutoRouter.of(context)
+                      //     .popAndPush(ButtomNavigationBarRouter(children: [
+                      //   HomeRoute(children: [
+                      //     VideoDetailRouter(moviesModel: moviesModel!)
+                      //   ])
+                      // ]));
+                      AutoRouter.of(context)
+                          .push(VideoPlayerRouter(moviesModel: moviesModel!));
+                    },
+                    child: Image.asset(
+                      'asset/play-icon.jpg',
+                      height: 100,
+                      width: 100,
+                      
+                    )),
               ),
 
               //appbar
@@ -586,40 +574,46 @@ class VideoDetail extends StatelessWidget {
   }
 
   customBackImg(String imageUrl) {
-    return SizedBox(
-      height: 200,
-      width: double.infinity,
-      child: Image.network(
-        imageUrl,
-        fit: BoxFit.fill,
-        color: Colors.grey.withOpacity(0.6),
-        colorBlendMode: BlendMode.color,
-        loadingBuilder: (
-          BuildContext context,
-          Widget child,
-          ImageChunkEvent? loadingProgress,
-        ) {
-          if (loadingProgress == null) return child;
-          return loadingProgress.expectedTotalBytes != null
-              ? ShimmerBox(
-                  height: 200,
-                  width: double.infinity,
-                  isColor: true,
-                  color: Colors.red[100],
-                  baseColor: Colors.grey[400],
-                  highlightColor: Colors.white,
-                  radius: 10,
-                )
-              : Container();
-
-          // CircularProgressIndicator(
-          //   value: loadingProgress.expectedTotalBytes != null
-          //       ? loadingProgress.cumulativeBytesLoaded /
-          //           loadingProgress.expectedTotalBytes!
-          //       : null,
-          // );
-        },
-      ),
+    return Stack(
+      children: [
+        SizedBox(
+          height: 500,
+          width: double.infinity,
+          child: CachedNetworkImage(
+            imageUrl: imageUrl,
+            fit: BoxFit.cover,
+            color: Colors.grey.withOpacity(0.6),
+            colorBlendMode: BlendMode.color,
+            progressIndicatorBuilder: (context, url, downloadProgress) =>
+                ShimmerBox(
+              height: 200,
+              width: double.infinity,
+              isColor: true,
+              color: Colors.red[100],
+              baseColor: Colors.grey[400],
+              highlightColor: Colors.black,
+              radius: 10,
+            ),
+            errorWidget: (context, url, error) => const Icon(Icons.error),
+          ),
+        ),
+        Container(
+          height: 500,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              gradient: LinearGradient(
+                  begin: FractionalOffset.topCenter,
+                  end: FractionalOffset.bottomCenter,
+                  colors: [
+                    Colors.black.withOpacity(0.1),
+                    const Color(0xFF141414),
+                  ],
+                  stops: const [
+                    0.4,
+                    0.8
+                  ])),
+        ),
+      ],
     );
   }
 
@@ -652,17 +646,17 @@ class VideoDetail extends StatelessWidget {
   }
 }
 
-Container customMovieBanner({String? urlAsset}) {
-  return Container(
-    height: 250,
-    width: 160,
-    decoration: BoxDecoration(
-      color: Colors.blue,
-      borderRadius: BorderRadius.circular(15),
-    ),
-    child: Image.network('$urlAsset', fit: BoxFit.fill),
-  );
-}
+// Container customMovieBanner({String? urlAsset}) {
+//   return Container(
+//     height: 250,
+//     width: 160,
+//     decoration: BoxDecoration(
+//       color: Colors.blue,
+//       borderRadius: BorderRadius.circular(15),
+//     ),
+//     child: Image.network('$urlAsset', fit: BoxFit.fill),
+//   );
+// }
 
 customMovieBannerV2(
     {String? urlAsset,
@@ -679,30 +673,19 @@ customMovieBannerV2(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.network(
-            '$urlAsset',
-            loadingBuilder: (BuildContext context, Widget child,
-                ImageChunkEvent? loadingProgress) {
-              if (loadingProgress == null) return child;
-              return loadingProgress.expectedTotalBytes != null
-                  ? ShimmerBox(
-                      height: 210,
-                      width: 140,
-                      isColor: true,
-                      color: Colors.red[100],
-                      baseColor: Colors.grey[400],
-                      highlightColor: Colors.white,
-                      radius: 10,
-                    )
-                  : Container();
-
-              // CircularProgressIndicator(
-              //   value: loadingProgress.expectedTotalBytes != null
-              //       ? loadingProgress.cumulativeBytesLoaded /
-              //           loadingProgress.expectedTotalBytes!
-              //       : null,
-              // );
-            },
+          CachedNetworkImage(
+            imageUrl: '$urlAsset',
+            progressIndicatorBuilder: (context, url, downloadProgress) =>
+                ShimmerBox(
+              height: 210,
+              width: 140,
+              isColor: true,
+              color: Colors.red[100],
+              baseColor: Colors.grey[400],
+              highlightColor: Colors.white,
+              radius: 10,
+            ),
+            errorWidget: (context, url, error) => const Icon(Icons.error),
             fit: BoxFit.cover,
             height: 210,
             width: 140,

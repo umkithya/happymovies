@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -107,7 +108,7 @@ class TVShowPage extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
+                padding: const EdgeInsets.only(top: 40, left: 20, right: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: const [
@@ -129,9 +130,9 @@ class TVShowPage extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 20, bottom: 100, left: 20),
+                padding: const EdgeInsets.only(top: 30, bottom: 100, left: 20),
                 child: SizedBox(
-                  height: 200,
+                  height: 280,
                   child: ListView(
                     // physics: const NeverScrollableScrollPhysics(),
                     scrollDirection: Axis.horizontal,
@@ -159,11 +160,20 @@ class TVShowPage extends StatelessWidget {
   }) {
     return Stack(
       children: [
-        Image.network(
-          '$thumnailUrl',
+        CachedNetworkImage(
+          imageUrl: '$thumnailUrl',
           fit: BoxFit.cover,
+          filterQuality: FilterQuality.low,
           height: 330,
           width: double.infinity,
+          maxHeightDiskCache: 250,
+          progressIndicatorBuilder: (context, url, downloadProgress) =>
+              const ShimmerBox(
+            height: 330,
+            color: Colors.black,
+            baseColor: Colors.black,
+          ),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
         ),
         Container(
           height: 500,
@@ -290,24 +300,22 @@ class CustomMovieCardV2 extends StatelessWidget {
               top: 0,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(40),
-                child: Image.network(
-                  '$imgUrl',
+                child: CachedNetworkImage(
+                  imageUrl: '$imgUrl',
                   fit: BoxFit.fill,
-                  loadingBuilder: (BuildContext context, Widget child,
-                      ImageChunkEvent? loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return loadingProgress.expectedTotalBytes != null
-                        ? ShimmerBox(
-                            height: 150,
-                            width: 200,
-                            isColor: true,
-                            color: Colors.red[100],
-                            baseColor: Colors.grey[400],
-                            highlightColor: Colors.white,
-                            radius: 10,
-                          )
-                        : Container();
-                  },
+                  filterQuality: FilterQuality.low,
+                  maxHeightDiskCache: 300,
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      ShimmerBox(
+                    height: 150,
+                    width: 200,
+                    isColor: true,
+                    color: Colors.red[100],
+                    baseColor: Colors.grey[400],
+                    highlightColor: Colors.white,
+                    radius: 10,
+                  ),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                   width: 200,
                   height: 280,
                 ),
@@ -367,11 +375,11 @@ class CustomMovieCardV2 extends StatelessWidget {
                 child: AutoSizeText(
                   title ?? '',
                   style: const TextStyle(
-                      fontSize: 14,
+                      fontSize: 16,
                       fontWeight: FontWeight.w700,
                       color: Colors.white),
-                  minFontSize: 10,
-                  maxLines: 2,
+                  minFontSize: 14,
+                  maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
