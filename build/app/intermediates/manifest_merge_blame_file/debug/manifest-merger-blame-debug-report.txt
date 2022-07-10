@@ -1,0 +1,348 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.happymovie"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+9        android:targetSdkVersion="31" />
+10    <!--
+11         Flutter needs it to communicate with the running application
+12         to allow setting breakpoints, to provide hot reload, etc.
+13    -->
+14    <uses-permission android:name="android.permission.INTERNET" />
+14-->D:\FlutterCode\happymovie\android\app\src\main\AndroidManifest.xml:3:5-66
+14-->D:\FlutterCode\happymovie\android\app\src\main\AndroidManifest.xml:3:22-64
+15    <!-- Although the *SdkVersion is captured in gradle build files, this is required for non gradle builds -->
+16    <!-- <uses-sdk android:minSdkVersion="14" /> -->
+17    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+17-->[com.google.firebase:firebase-firestore:24.1.2] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\f5bbed170b360fd19b200a85558d3766\jetified-firebase-firestore-24.1.2\AndroidManifest.xml:13:5-79
+17-->[com.google.firebase:firebase-firestore:24.1.2] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\f5bbed170b360fd19b200a85558d3766\jetified-firebase-firestore-24.1.2\AndroidManifest.xml:13:22-76
+18    <uses-permission android:name="android.permission.WAKE_LOCK" />
+18-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:25:5-68
+18-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:25:22-65
+19    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+19-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:27:5-81
+19-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:27:22-78
+20    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+20-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:28:5-77
+20-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:28:22-74
+21
+22    <application
+23        android:name="android.app.Application"
+24        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+24-->[androidx.core:core:1.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\3f6d9ef3b65bfee01861f2e5d3bab0bd\core-1.7.0\AndroidManifest.xml:24:18-86
+25        android:debuggable="true"
+26        android:icon="@mipmap/ic_launcher"
+27        android:label="happymovie"
+28        android:usesCleartextTraffic="true" >
+29        <activity
+30            android:name="com.example.happymovie.MainActivity"
+31            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+32            android:exported="true"
+33            android:hardwareAccelerated="true"
+34            android:launchMode="singleTop"
+35            android:theme="@style/LaunchTheme"
+36            android:windowSoftInputMode="adjustResize" >
+37
+38            <!--
+39                 Specifies an Android theme to apply to this Activity as soon as
+40                 the Android process has started. This theme is visible to the user
+41                 while the Flutter UI initializes. After that, this theme continues
+42                 to determine the Window background behind the Flutter UI.
+43            -->
+44            <meta-data
+45                android:name="io.flutter.embedding.android.NormalTheme"
+46                android:resource="@style/NormalTheme" />
+47
+48            <intent-filter>
+49                <action android:name="android.intent.action.MAIN" />
+50
+51                <category android:name="android.intent.category.LAUNCHER" />
+52            </intent-filter>
+53        </activity>
+54        <!--
+55             Don't delete the meta-data below.
+56             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+57        -->
+58        <meta-data
+59            android:name="flutterEmbedding"
+60            android:value="2" />
+61
+62        <service
+62-->[:cloud_firestore] D:\FlutterCode\happymovie\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-12:19
+63            android:name="com.google.firebase.components.ComponentDiscoveryService"
+63-->[:cloud_firestore] D:\FlutterCode\happymovie\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:8:18-89
+64            android:directBootAware="true"
+64-->[com.google.firebase:firebase-common:20.1.1] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\0f67b2d2737c37bf1274c8f8df4996b1\jetified-firebase-common-20.1.1\AndroidManifest.xml:35:13-43
+65            android:exported="false" >
+65-->[com.google.firebase:firebase-firestore:24.1.2] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\f5bbed170b360fd19b200a85558d3766\jetified-firebase-firestore-24.1.2\AndroidManifest.xml:19:13-37
+66            <meta-data
+66-->[:cloud_firestore] D:\FlutterCode\happymovie\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-11:85
+67                android:name="com.google.firebase.components:io.flutter.plugins.firebase.firestore.FlutterFirebaseFirestoreRegistrar"
+67-->[:cloud_firestore] D:\FlutterCode\happymovie\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:10:17-134
+68                android:value="com.google.firebase.components.ComponentRegistrar" />
+68-->[:cloud_firestore] D:\FlutterCode\happymovie\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:11:17-82
+69            <meta-data
+69-->[:firebase_core] D:\FlutterCode\happymovie\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-11:85
+70                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar"
+70-->[:firebase_core] D:\FlutterCode\happymovie\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:10:17-124
+71                android:value="com.google.firebase.components.ComponentRegistrar" />
+71-->[:firebase_core] D:\FlutterCode\happymovie\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:11:17-82
+72            <meta-data
+72-->[com.google.firebase:firebase-firestore:24.1.2] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\f5bbed170b360fd19b200a85558d3766\jetified-firebase-firestore-24.1.2\AndroidManifest.xml:20:13-22:85
+73                android:name="com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar"
+73-->[com.google.firebase:firebase-firestore:24.1.2] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\f5bbed170b360fd19b200a85558d3766\jetified-firebase-firestore-24.1.2\AndroidManifest.xml:21:17-111
+74                android:value="com.google.firebase.components.ComponentRegistrar" />
+74-->[com.google.firebase:firebase-firestore:24.1.2] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\f5bbed170b360fd19b200a85558d3766\jetified-firebase-firestore-24.1.2\AndroidManifest.xml:22:17-82
+75        </service>
+76
+77        <uses-library
+77-->[androidx.window:window:1.0.0-beta04] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\cea45e25bbe77c9713c39e234ccfd7bd\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
+78            android:name="androidx.window.extensions"
+78-->[androidx.window:window:1.0.0-beta04] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\cea45e25bbe77c9713c39e234ccfd7bd\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
+79            android:required="false" />
+79-->[androidx.window:window:1.0.0-beta04] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\cea45e25bbe77c9713c39e234ccfd7bd\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
+80        <uses-library
+80-->[androidx.window:window:1.0.0-beta04] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\cea45e25bbe77c9713c39e234ccfd7bd\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
+81            android:name="androidx.window.sidecar"
+81-->[androidx.window:window:1.0.0-beta04] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\cea45e25bbe77c9713c39e234ccfd7bd\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
+82            android:required="false" />
+82-->[androidx.window:window:1.0.0-beta04] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\cea45e25bbe77c9713c39e234ccfd7bd\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
+83
+84        <provider
+84-->[com.google.firebase:firebase-common:20.1.1] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\0f67b2d2737c37bf1274c8f8df4996b1\jetified-firebase-common-20.1.1\AndroidManifest.xml:26:9-31:39
+85            android:name="com.google.firebase.provider.FirebaseInitProvider"
+85-->[com.google.firebase:firebase-common:20.1.1] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\0f67b2d2737c37bf1274c8f8df4996b1\jetified-firebase-common-20.1.1\AndroidManifest.xml:27:13-77
+86            android:authorities="com.example.happymovie.firebaseinitprovider"
+86-->[com.google.firebase:firebase-common:20.1.1] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\0f67b2d2737c37bf1274c8f8df4996b1\jetified-firebase-common-20.1.1\AndroidManifest.xml:28:13-72
+87            android:directBootAware="true"
+87-->[com.google.firebase:firebase-common:20.1.1] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\0f67b2d2737c37bf1274c8f8df4996b1\jetified-firebase-common-20.1.1\AndroidManifest.xml:29:13-43
+88            android:exported="false"
+88-->[com.google.firebase:firebase-common:20.1.1] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\0f67b2d2737c37bf1274c8f8df4996b1\jetified-firebase-common-20.1.1\AndroidManifest.xml:30:13-37
+89            android:initOrder="100" />
+89-->[com.google.firebase:firebase-common:20.1.1] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\0f67b2d2737c37bf1274c8f8df4996b1\jetified-firebase-common-20.1.1\AndroidManifest.xml:31:13-36
+90        <provider
+90-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:31:9-39:20
+91            android:name="androidx.startup.InitializationProvider"
+91-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:32:13-67
+92            android:authorities="com.example.happymovie.androidx-startup"
+92-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:33:13-68
+93            android:exported="false" >
+93-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:34:13-37
+94            <meta-data
+94-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:36:13-38:52
+95                android:name="androidx.work.WorkManagerInitializer"
+95-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:37:17-68
+96                android:value="androidx.startup" />
+96-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:38:17-49
+97        </provider>
+98
+99        <service
+99-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:41:9-46:35
+100            android:name="androidx.work.impl.background.systemalarm.SystemAlarmService"
+100-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:42:13-88
+101            android:directBootAware="false"
+101-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:43:13-44
+102            android:enabled="@bool/enable_system_alarm_service_default"
+102-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:44:13-72
+103            android:exported="false" />
+103-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:45:13-37
+104        <service
+104-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:47:9-53:35
+105            android:name="androidx.work.impl.background.systemjob.SystemJobService"
+105-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:48:13-84
+106            android:directBootAware="false"
+106-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:49:13-44
+107            android:enabled="@bool/enable_system_job_service_default"
+107-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:50:13-70
+108            android:exported="true"
+108-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:51:13-36
+109            android:permission="android.permission.BIND_JOB_SERVICE" />
+109-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:52:13-69
+110        <service
+110-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:54:9-59:35
+111            android:name="androidx.work.impl.foreground.SystemForegroundService"
+111-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:55:13-81
+112            android:directBootAware="false"
+112-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:56:13-44
+113            android:enabled="@bool/enable_system_foreground_service_default"
+113-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:57:13-77
+114            android:exported="false" />
+114-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:58:13-37
+115
+116        <receiver
+116-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:61:9-66:35
+117            android:name="androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver"
+117-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:62:13-88
+118            android:directBootAware="false"
+118-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:63:13-44
+119            android:enabled="true"
+119-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:64:13-35
+120            android:exported="false" />
+120-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:65:13-37
+121        <receiver
+121-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:67:9-77:20
+122            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy"
+122-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:68:13-106
+123            android:directBootAware="false"
+123-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:69:13-44
+124            android:enabled="false"
+124-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:70:13-36
+125            android:exported="false" >
+125-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:71:13-37
+126            <intent-filter>
+126-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:73:13-76:29
+127                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+127-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:74:17-87
+127-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:74:25-84
+128                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+128-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:75:17-90
+128-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:75:25-87
+129            </intent-filter>
+130        </receiver>
+131        <receiver
+131-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:78:9-88:20
+132            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy"
+132-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:79:13-104
+133            android:directBootAware="false"
+133-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:80:13-44
+134            android:enabled="false"
+134-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:81:13-36
+135            android:exported="false" >
+135-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:82:13-37
+136            <intent-filter>
+136-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:84:13-87:29
+137                <action android:name="android.intent.action.BATTERY_OKAY" />
+137-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:85:17-77
+137-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:85:25-74
+138                <action android:name="android.intent.action.BATTERY_LOW" />
+138-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:86:17-76
+138-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:86:25-73
+139            </intent-filter>
+140        </receiver>
+141        <receiver
+141-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:89:9-99:20
+142            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy"
+142-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:90:13-104
+143            android:directBootAware="false"
+143-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:91:13-44
+144            android:enabled="false"
+144-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:92:13-36
+145            android:exported="false" >
+145-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:93:13-37
+146            <intent-filter>
+146-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:95:13-98:29
+147                <action android:name="android.intent.action.DEVICE_STORAGE_LOW" />
+147-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:96:17-83
+147-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:96:25-80
+148                <action android:name="android.intent.action.DEVICE_STORAGE_OK" />
+148-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:97:17-82
+148-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:97:25-79
+149            </intent-filter>
+150        </receiver>
+151        <receiver
+151-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:100:9-109:20
+152            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy"
+152-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:101:13-103
+153            android:directBootAware="false"
+153-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:102:13-44
+154            android:enabled="false"
+154-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:103:13-36
+155            android:exported="false" >
+155-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:104:13-37
+156            <intent-filter>
+156-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:106:13-108:29
+157                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+157-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:107:17-79
+157-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:107:25-76
+158            </intent-filter>
+159        </receiver>
+160        <receiver
+160-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:110:9-121:20
+161            android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver"
+161-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:111:13-88
+162            android:directBootAware="false"
+162-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:112:13-44
+163            android:enabled="false"
+163-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:113:13-36
+164            android:exported="false" >
+164-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:114:13-37
+165            <intent-filter>
+165-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:116:13-120:29
+166                <action android:name="android.intent.action.BOOT_COMPLETED" />
+166-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:117:17-79
+166-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:117:25-76
+167                <action android:name="android.intent.action.TIME_SET" />
+167-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:118:17-73
+167-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:118:25-70
+168                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+168-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:119:17-81
+168-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:119:25-78
+169            </intent-filter>
+170        </receiver>
+171        <receiver
+171-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:122:9-131:20
+172            android:name="androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver"
+172-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:123:13-99
+173            android:directBootAware="false"
+173-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:124:13-44
+174            android:enabled="@bool/enable_system_alarm_service_default"
+174-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:125:13-72
+175            android:exported="false" >
+175-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:126:13-37
+176            <intent-filter>
+176-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:128:13-130:29
+177                <action android:name="androidx.work.impl.background.systemalarm.UpdateProxies" />
+177-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:129:17-98
+177-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:129:25-95
+178            </intent-filter>
+179        </receiver>
+180        <receiver
+180-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:132:9-142:20
+181            android:name="androidx.work.impl.diagnostics.DiagnosticsReceiver"
+181-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:133:13-78
+182            android:directBootAware="false"
+182-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:134:13-44
+183            android:enabled="true"
+183-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:135:13-35
+184            android:exported="true"
+184-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:136:13-36
+185            android:permission="android.permission.DUMP" >
+185-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:137:13-57
+186            <intent-filter>
+186-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:139:13-141:29
+187                <action android:name="androidx.work.diagnostics.REQUEST_DIAGNOSTICS" />
+187-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:140:17-88
+187-->[androidx.work:work-runtime:2.7.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4173162019c40c8fdf6ab52798284560\work-runtime-2.7.0\AndroidManifest.xml:140:25-85
+188            </intent-filter>
+189        </receiver>
+190
+191        <activity
+191-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\1c0769389455a4c14b7a50bc2530cb4a\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:9-22:45
+192            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+192-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\1c0769389455a4c14b7a50bc2530cb4a\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:19-85
+193            android:exported="false"
+193-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\1c0769389455a4c14b7a50bc2530cb4a\jetified-play-services-base-18.0.1\AndroidManifest.xml:22:19-43
+194            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+194-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\1c0769389455a4c14b7a50bc2530cb4a\jetified-play-services-base-18.0.1\AndroidManifest.xml:21:19-78
+195
+196        <meta-data
+196-->[com.google.android.gms:play-services-basement:18.0.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4a1e8147c3db656939cfc830651ce63e\jetified-play-services-basement-18.0.0\AndroidManifest.xml:21:9-23:69
+197            android:name="com.google.android.gms.version"
+197-->[com.google.android.gms:play-services-basement:18.0.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4a1e8147c3db656939cfc830651ce63e\jetified-play-services-basement-18.0.0\AndroidManifest.xml:22:13-58
+198            android:value="@integer/google_play_services_version" />
+198-->[com.google.android.gms:play-services-basement:18.0.0] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\4a1e8147c3db656939cfc830651ce63e\jetified-play-services-basement-18.0.0\AndroidManifest.xml:23:13-66
+199
+200        <service
+200-->[androidx.room:room-runtime:2.2.5] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\20ab9516f5f592df29683e213cda0be8\room-runtime-2.2.5\AndroidManifest.xml:25:9-28:40
+201            android:name="androidx.room.MultiInstanceInvalidationService"
+201-->[androidx.room:room-runtime:2.2.5] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\20ab9516f5f592df29683e213cda0be8\room-runtime-2.2.5\AndroidManifest.xml:26:13-74
+202            android:directBootAware="true"
+202-->[androidx.room:room-runtime:2.2.5] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\20ab9516f5f592df29683e213cda0be8\room-runtime-2.2.5\AndroidManifest.xml:27:13-43
+203            android:exported="false" />
+203-->[androidx.room:room-runtime:2.2.5] C:\Users\KITHYA\.gradle\caches\transforms-2\files-2.1\20ab9516f5f592df29683e213cda0be8\room-runtime-2.2.5\AndroidManifest.xml:28:13-37
+204    </application>
+205
+206</manifest>
