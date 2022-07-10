@@ -2,7 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:happymovie/page/home_screen/controller/home_screen_controller.dart';
@@ -12,396 +14,438 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../config/route/app_route.gr.dart';
 import '../../widgets/custom_shimmer_box/custom_shimmer_box.dart';
+import '../tv_show.dart/controller/tv_show_controller.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
   final homeController = Get.put(HomeScreenController());
   final moviesController = Get.put(MoviesController());
+  final tvshowController = Get.put(TVShowController());
   final controller = CarouselController();
+
   @override
   Widget build(BuildContext context) {
     // _homeController.fetchPopularMovie();
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     return Obx(
       () => Scaffold(
         backgroundColor: const Color(0xFF141414),
         // backgroundColor: Colors.white,
+        // appBar: AppBar(
+        //   leading: const Padding(
+        //     padding: EdgeInsets.only(left: 20),
+        //     child: Icon(
+        //       CupertinoIcons.search,
+        //       color: Colors.white,
+        //       size: 35,
+        //     ),
+        //   ),
+        //   title: Image.asset(
+        //     'asset/logo-one.png',
+        //     fit: BoxFit.fill,
+        //     height: 40,
+        //     width: 200,
+        //   ),
+        //   centerTitle: true,
+        //   elevation: 0,
+        //   backgroundColor: const Color(0xFF141414),
+        // ),
         body: Stack(
           children: [
-            ListView(
-              // physics: const NeverScrollableScrollPhysics(),
-              controller: ScrollController(),
-              children: [
-                //popular title:
+            Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("asset/background.jpg"),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 80),
+              child: ListView(
+                // physics: const NeverScrollableScrollPhysics(),
+                controller: ScrollController(),
+                children: [
+                  // //popular title:
 
-                Padding(
-                  padding: const EdgeInsets.only(top: 60, left: 0, right: 0),
-                  child: Stack(
-                    children: [
-                      CachedNetworkImage(
+                  // Padding(
+                  //   padding: const EdgeInsets.only(top: 60, left: 0, right: 0),
+                  //   child: Stack(
+                  //     children: [
+                  // CachedNetworkImage(
+                  //   imageUrl:
+                  //       'https://poetryschool.com/assets/uploads/2014/12/PosterCollage.jpg',
+                  //   fit: BoxFit.cover,
+                  //   height: 300,
+                  //   width: double.infinity,
+                  //   progressIndicatorBuilder:
+                  //       (context, url, downloadProgress) =>
+                  //           const ShimmerBox(height: 200),
+                  //   errorWidget: (context, url, error) =>
+                  //       const Icon(Icons.error),
+                  // ),
+                  // Container(
+                  //   height: 300,
+                  //   decoration: BoxDecoration(
+                  //       color: Colors.white,
+                  //       gradient: LinearGradient(
+                  //           begin: FractionalOffset.topCenter,
+                  //           end: FractionalOffset.bottomCenter,
+                  //           colors: [
+                  //             Colors.black.withOpacity(0.2),
+                  //             const Color(0xFF141414),
+                  //           ],
+                  //           stops: const [
+                  //             0.3,
+                  //             1.5
+                  //           ])),
+                  // ),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 20, top: 0),
+                    child: Text(
+                      'Upcoming',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 40, left: 0, right: 0),
+                    child: CarouselSlider(
+                        carouselController: controller,
+                        items: homeController.homeImageSliderList
+                            .map((e) => Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 15),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: CachedNetworkImage(
+                                      imageUrl: e,
+                                      fit: BoxFit.fill,
+                                      width: double.infinity,
+                                      memCacheHeight: (200 *
+                                              MediaQuery.of(context)
+                                                  .devicePixelRatio)
+                                          .round(),
+                                      memCacheWidth: 250,
+                                      progressIndicatorBuilder:
+                                          (context, url, downloadProgress) =>
+                                              const ShimmerBox(
+                                        height: 200,
+                                      ),
+                                      errorWidget: (context, url, error) =>
+                                          const Icon(Icons.error),
+                                    ),
+                                  ),
+                                ))
+                            .toList(),
+                        options: CarouselOptions(
+                          onPageChanged: (index, carouselPageChangedReason) {
+                            homeController.activeIndex.value = index;
+                          },
+                          height: 200,
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          initialPage: 0,
+                          enlargeCenterPage: true,
+                          enlargeStrategy: CenterPageEnlargeStrategy.height,
+                          // aspectRatio: 16 / 9,
+                          viewportFraction: 1,
+                          autoPlay: true,
+                        )),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 20, left: 0, bottom: 30),
+                    // top: 0,
+                    // left: 0,
+                    // right: 0,
+                    // bottom: 40,
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: AnimatedSmoothIndicator(
+                        count: 6,
+                        curve: Curves.easeInOutBack,
+
+                        effect: const ScrollingDotsEffect(
+                            spacing: 10,
+                            radius: 0,
+                            dotWidth: 20,
+                            dotHeight: 4,
+                            //paintStyle: PaintingStyle.stroke,
+                            strokeWidth: 1.5,
+                            dotColor: Color(0xFF555555),
+                            activeDotColor: Color(0xFFFFFFFF)),
+                        // your preferred effect
+                        onDotClicked: (index) {
+                          //controller.animateToPage(index);
+                        },
+                        activeIndex: (homeController.activeIndex.value),
+                      ),
+                    ),
+                  ),
+                  // ],
+                  // ),
+                  // ),
+
+                  //category card
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8, left: 20, right: 0),
+                    child: SizedBox(
+                      height: 50,
+                      child: ListView(
+                        controller: ScrollController(),
+                        // physics: const NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        children: homeController.categoryList
+                            .map((e) => customCategoryCard(
+                                  imgUrl: e.imgUrl,
+                                  color: e.color,
+                                  onTap: () {
+                                    moviesController.appBarTitle.value =
+                                        e.title!;
+                                    context.router
+                                        .push(const MoviesPageRoute());
+                                  },
+                                  text: e.title,
+                                  textStyle: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ))
+                            .toList(),
+                      ),
+                    ),
+                  ),
+                  //ads banner
+                  Padding(
+                    padding: const EdgeInsets.only(top: 30, left: 0, right: 0),
+                    child: SizedBox(
+                      height: 55,
+                      width: double.infinity,
+                      child: CachedNetworkImage(
                         imageUrl:
-                            'https://poetryschool.com/assets/uploads/2014/12/PosterCollage.jpg',
+                            'https://www.whatisthematrix.com/assets/images/desktopbanner.jpg',
                         fit: BoxFit.cover,
-                        height: 300,
-                        width: double.infinity,
+                        memCacheHeight:
+                            (55 * MediaQuery.of(context).devicePixelRatio)
+                                .round(),
+                        // memCacheWidth: 200,
                         progressIndicatorBuilder:
                             (context, url, downloadProgress) =>
-                                const ShimmerBox(height: 200),
+                                const ShimmerBox(
+                          height: 55,
+                        ),
                         errorWidget: (context, url, error) =>
                             const Icon(Icons.error),
                       ),
-                      Container(
-                        height: 300,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            gradient: LinearGradient(
-                                begin: FractionalOffset.topCenter,
-                                end: FractionalOffset.bottomCenter,
-                                colors: [
-                                  Colors.black.withOpacity(0.2),
-                                  const Color(0xFF141414),
-                                ],
-                                stops: const [
-                                  0.3,
-                                  1.5
-                                ])),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          homeController.addMovieDetail();
-                        },
-                        child: const Padding(
-                          padding: EdgeInsets.only(left: 20, top: 0),
-                          child: Text(
-                            'Upcoming',
+                    ),
+                  ),
+                  //popular title:
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 40, left: 20, right: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Popular',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            moviesController.appBarTitle.value =
+                                'Popular Movies';
+                            context.router.push(const MoviesPageRoute());
+                          },
+                          child: const Text(
+                            'See More',
                             style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
+                                color: Color(0xFFC6C6C6),
+                                fontSize: 10,
                                 fontWeight: FontWeight.w700),
                           ),
                         ),
-                      ),
-                      Positioned(
-                        top: 40,
-                        left: 0,
-                        right: 0,
-                        child: CarouselSlider(
-                            carouselController: controller,
-                            items: homeController.homeImageSliderList
-                                .map((e) => Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 15),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(10),
-                                        child: CachedNetworkImage(
-                                          imageUrl: e,
-                                          fit: BoxFit.fill,
-                                          width: double.infinity,
-                                          maxHeightDiskCache: 200,
-                                          progressIndicatorBuilder: (context,
-                                                  url, downloadProgress) =>
-                                              const ShimmerBox(
-                                            height: 200,
+                      ],
+                    ),
+                  ),
+                  //popular movie card show
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 30, bottom: 0, left: 20, right: 0),
+                    child: SizedBox(
+                      height: 280,
+                      child: StreamBuilder<List<MoviesModel>>(
+                          stream: homeController.readMovie(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasError) {
+                              return Text(
+                                  'Something went wrong! ${snapshot.error}');
+                            } else if (snapshot.hasData) {
+                              final movies = snapshot.data;
+                              return ListView(
+                                // physics: const NeverScrollableScrollPhysics(),
+                                scrollDirection: Axis.horizontal,
+                                children: movies!
+                                    .map((e) => GestureDetector(
+                                          onTap: () {
+                                            context.router.push(
+                                                VideoDetailRoute(
+                                                    moviesModel: e));
+                                          },
+                                          child: CustomMovieCard(
+                                            imgUrl: e.imageUrl,
+                                            rate: e.rate,
+                                            title: e.movieName,
                                           ),
-                                          errorWidget: (context, url, error) =>
-                                              const Icon(Icons.error),
-                                        ),
-                                      ),
-                                    ))
-                                .toList(),
-                            options: CarouselOptions(
-                              onPageChanged:
-                                  (index, carouselPageChangedReason) {
-                                homeController.activeIndex.value = index;
-                              },
-                              height: 200,
-                              clipBehavior: Clip.antiAliasWithSaveLayer,
-                              initialPage: 0,
-                              enlargeCenterPage: true,
-                              enlargeStrategy: CenterPageEnlargeStrategy.height,
-                              // aspectRatio: 16 / 9,
-                              viewportFraction: 1,
-                              autoPlay: true,
-                            )),
-                      ),
-                      Positioned(
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        bottom: 40,
-                        child: Align(
-                          alignment: Alignment.bottomCenter,
-                          child: AnimatedSmoothIndicator(
-                            count: 6,
-                            curve: Curves.easeInOutBack,
-
-                            effect: const ScrollingDotsEffect(
-                                spacing: 5,
-                                radius: 0,
-                                dotWidth: 20,
-                                dotHeight: 5,
-                                //paintStyle: PaintingStyle.stroke,
-                                strokeWidth: 1.5,
-                                dotColor: Color(0xFF555555),
-                                activeDotColor: Color(0xFFDAA520)),
-                            // your preferred effect
-                            onDotClicked: (index) {
-                              //controller.animateToPage(index);
-                            },
-                            activeIndex: homeController.activeIndex.value,
-                          ),
+                                        ))
+                                    .toList(),
+                              );
+                            } else {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                          }),
+                    ),
+                  ),
+                  //Tv show label
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 50, left: 20, right: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                        Text(
+                          'TV Shows',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                //category card
-                Padding(
-                  padding: const EdgeInsets.only(top: 8, left: 0, right: 0),
-                  child: SizedBox(
-                    height: 50,
-                    child: ListView(
-                      controller: ScrollController(),
-                      // physics: const NeverScrollableScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      children: homeController.categoryList
-                          .map((e) => customCategoryCard(
-                                imgUrl: e.imgUrl,
-                                color: e.color,
-                                onTap: () {
-                                  moviesController.appBarTitle.value = e.title!;
-                                  context.router.push(const MoviesPageRoute());
-                                },
-                                text: e.title,
-                                textStyle: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              ))
-                          .toList(),
-                    ),
-                  ),
-                ),
-                //ads banner
-                Padding(
-                  padding: const EdgeInsets.only(top: 30, left: 5, right: 5),
-                  child: SizedBox(
-                    height: 55,
-                    width: double.infinity,
-                    child: CachedNetworkImage(
-                      imageUrl:
-                          'https://www.whatisthematrix.com/assets/images/desktopbanner.jpg',
-                      fit: BoxFit.cover,
-                      // memCacheHeight: 400,
-                      // memCacheWidth: 300,
-                      maxHeightDiskCache: 200,
-                      progressIndicatorBuilder:
-                          (context, url, downloadProgress) => const ShimmerBox(
-                        height: 55,
-                      ),
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
-                    ),
-                  ),
-                ),
-                //popular title:
-                Padding(
-                  padding: const EdgeInsets.only(top: 40, left: 20, right: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Popular',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          moviesController.appBarTitle.value = 'Popular Movies';
-                          context.router.push(const MoviesPageRoute());
-                        },
-                        child: const Text(
+                        Text(
                           'See More',
                           style: TextStyle(
                               color: Color(0xFFC6C6C6),
                               fontSize: 10,
                               fontWeight: FontWeight.w700),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                //popular movie card show
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 30, bottom: 0, left: 20, right: 0),
-                  child: SizedBox(
-                    height: 280,
-                    child: StreamBuilder<List<MoviesModel>>(
-                        stream: homeController.readMovie(),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasError) {
-                            return Text(
-                                'Something went wrong! ${snapshot.error}');
-                          } else if (snapshot.hasData) {
-                            final movies = snapshot.data;
-                            return ListView(
-                              // physics: const NeverScrollableScrollPhysics(),
-                              scrollDirection: Axis.horizontal,
-                              children: movies!
-                                  .map((e) => GestureDetector(
-                                        onTap: () {
-                                          context.router.push(
-                                              VideoDetailRoute(moviesModel: e));
-                                        },
-                                        child: CustomMovieCard(
-                                          imgUrl: e.imageUrl,
-                                          rate: e.rate,
-                                          title: e.movieName,
-                                        ),
-                                      ))
-                                  .toList(),
-                            );
-                          } else {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          }
-                        }),
-                  ),
-                ),
-                //Tv show label
-                Padding(
-                  padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text(
-                        'TV Shows',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      Text(
-                        'See More',
-                        style: TextStyle(
-                            color: Color(0xFFC6C6C6),
-                            fontSize: 10,
-                            fontWeight: FontWeight.w700),
-                      ),
-                    ],
-                  ),
-                ),
-                //tvshow movie card show
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 30, bottom: 10, left: 20, right: 0),
-                  child: SizedBox(
-                    height: 280,
-                    child: ListView(
-                      // physics: const NeverScrollableScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      children: homeController.tvshowListCard
-                          .map((e) => CustomMovieCard(
-                                imgUrl: e.imageUrl,
-                                rate: e.rate,
-                                title: e.movieName,
-                              ))
-                          .toList(),
+                      ],
                     ),
                   ),
-                ),
+                  //tvshow movie card show
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 30, bottom: 10, left: 20, right: 0),
+                    child: SizedBox(
+                      height: 280,
+                      child: ListView(
+                        // physics: const NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        children: tvshowController.tvshowListCard
+                            .map((e) => CustomMovieCard(
+                                  imgUrl: e.imageUrl,
+                                  rate: e.rate,
+                                  title: e.movieName,
+                                ))
+                            .toList(),
+                      ),
+                    ),
+                  ),
 
-                //language card
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 50, left: 0, bottom: 10, right: 0),
-                  child: SizedBox(
-                    height: 45,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: homeController.languageList
-                          .map((e) => customCategoryCard(
-                              isUnHideImage: false,
-                              height: 45,
-                              color: e.color,
-                              onTap: () {},
-                              text: e.title,
-                              textStyle: const TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold)))
-                          .toList(),
+                  //language card
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 50, left: 0, bottom: 10, right: 0),
+                    child: SizedBox(
+                      height: 45,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: homeController.languageList
+                            .map((e) => customCategoryCard(
+                                isUnHideImage: false,
+                                height: 45,
+                                color: e.color,
+                                onTap: () {},
+                                text: e.title,
+                                textStyle: const TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold)))
+                            .toList(),
+                      ),
                     ),
                   ),
-                ),
-                //Khmer label
-                Padding(
-                  padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text(
-                        'Khmer',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      Text(
-                        'See More',
-                        style: TextStyle(
-                            color: Color(0xFFC6C6C6),
-                            fontSize: 10,
-                            fontWeight: FontWeight.w700),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 30, bottom: 80, left: 20),
-                  child: SizedBox(
-                    height: 280,
-                    child: ListView(
-                      // physics: const NeverScrollableScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      children: homeController.languageMovieHomeList
-                          .map((e) => CustomMovieCard(
-                                imgUrl: e.imageUrl,
-                                rate: e.rate,
-                                title: e.movieName,
-                              ))
-                          .toList(),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            //search section
-            Container(
-              color: const Color(0xFF141414),
-              height: 80,
-              child: Padding(
-                padding: const EdgeInsets.only(
-                    top: 30, left: 20, right: 20, bottom: 10),
-                child: SizedBox(
-                  height: 35,
-                  width: double.infinity,
-                  child: TextField(
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
+                  //Khmer label
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 50, left: 20, right: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                        Text(
+                          'Khmer',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700),
                         ),
-                        filled: true,
-                        hintStyle:
-                            TextStyle(color: Colors.grey[800], fontSize: 12),
-                        hintText: "Search your movie...",
-                        contentPadding: const EdgeInsets.only(top: 0, left: 10),
-                        fillColor: Colors.white70),
+                        Text(
+                          'See More',
+                          style: TextStyle(
+                              color: Color(0xFFC6C6C6),
+                              fontSize: 10,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 30, bottom: 80, left: 20),
+                    child: SizedBox(
+                      height: 280,
+                      child: ListView(
+                        // physics: const NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        children: homeController.languageMovieHomeList
+                            .map((e) => CustomMovieCard(
+                                  imgUrl: e.imageUrl,
+                                  rate: e.rate,
+                                  title: e.movieName,
+                                ))
+                            .toList(),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              height: 80,
+              width: double.maxFinite,
+              color: const Color(0xFF171C20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 20, top: 30, bottom: 5),
+                    child: Image.asset('asset/logo-s.png'),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(right: 20, top: 20),
+                    child: Icon(
+                      CupertinoIcons.search,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
@@ -441,8 +485,9 @@ class CustomMovieCard extends StatelessWidget {
                     child: CachedNetworkImage(
                       imageUrl: '$imgUrl',
                       fit: BoxFit.fill,
-                      memCacheHeight: 300,
-                      memCacheWidth: 300,
+                      memCacheHeight:
+                          (150 * MediaQuery.of(context).devicePixelRatio)
+                              .round(),
                       progressIndicatorBuilder:
                           (context, url, downloadProgress) => ShimmerBox(
                         height: 150,
@@ -566,7 +611,7 @@ Widget customCategoryCard(
     bool? isUnHideImage = true,
     TextStyle? textStyle}) {
   return Padding(
-    padding: const EdgeInsets.only(left: 20, right: 0),
+    padding: const EdgeInsets.only(left: 0, right: 15),
     child: GestureDetector(
       onTap: onTap,
       child: Container(
@@ -607,6 +652,27 @@ Widget customCategoryCard(
                         const Icon(Icons.error),
                   ),
                 ),
+              ),
+            ),
+            Visibility(
+              visible: isUnHideImage,
+              child: Container(
+                height: height,
+                width: width,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8),
+                    gradient: LinearGradient(
+                        begin: FractionalOffset.topCenter,
+                        end: FractionalOffset.bottomCenter,
+                        colors: [
+                          Colors.black.withOpacity(0.1),
+                          const Color(0xFF141414),
+                        ],
+                        stops: const [
+                          0.2,
+                          1.0,
+                        ])),
               ),
             ),
             Align(

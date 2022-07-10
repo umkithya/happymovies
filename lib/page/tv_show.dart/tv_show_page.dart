@@ -39,7 +39,7 @@ class TVShowPage extends StatelessWidget {
                       height: 520,
                       scrollPhysics: const NeverScrollableScrollPhysics(),
                     ),
-                    items: homeController.tvshowListCard
+                    items: tvshowController.tvshowListCard
                         .map(
                           (e) => customSliderMovieImage(
                             rate: e.rate,
@@ -93,7 +93,7 @@ class TVShowPage extends StatelessWidget {
                           onPageChanged: (i, v) {
                             carouselControllerImage.animateToPage(i);
                           }),
-                      items: homeController.tvshowListCard
+                      items: tvshowController.tvshowListCard
                           .map(
                             (e) => CustomMovieCardV2(
                               imgUrl: e.imageUrl,
@@ -136,7 +136,7 @@ class TVShowPage extends StatelessWidget {
                   child: ListView(
                     // physics: const NeverScrollableScrollPhysics(),
                     scrollDirection: Axis.horizontal,
-                    children: homeController.tvshowListCard
+                    children: tvshowController.tvshowListCard
                         .map((e) => CustomMovieCard(
                               imgUrl: e.imageUrl,
                               rate: e.rate,
@@ -166,7 +166,9 @@ class TVShowPage extends StatelessWidget {
           filterQuality: FilterQuality.low,
           height: 330,
           width: double.infinity,
-          maxHeightDiskCache: 250,
+          // maxHeightDiskCache: 250,
+          memCacheHeight: 150,
+          memCacheWidth: 200,
           progressIndicatorBuilder: (context, url, downloadProgress) =>
               const ShimmerBox(
             height: 330,
@@ -303,8 +305,10 @@ class CustomMovieCardV2 extends StatelessWidget {
                 child: CachedNetworkImage(
                   imageUrl: '$imgUrl',
                   fit: BoxFit.fill,
-                  filterQuality: FilterQuality.low,
-                  maxHeightDiskCache: 300,
+                  memCacheHeight:
+                      (320 * MediaQuery.of(context).devicePixelRatio).round(),
+                  memCacheWidth:
+                      (200 * MediaQuery.of(context).devicePixelRatio).round(),
                   progressIndicatorBuilder: (context, url, downloadProgress) =>
                       ShimmerBox(
                     height: 150,
@@ -368,7 +372,8 @@ class CustomMovieCardV2 extends StatelessWidget {
                 : Container(),
             Positioned(
               bottom: 20,
-              left: 0,
+              left: 20,
+              right: 20,
               child: SizedBox(
                 width: 200,
                 height: 22,
@@ -384,63 +389,63 @@ class CustomMovieCardV2 extends StatelessWidget {
                 ),
               ),
             ),
-            Positioned(
-              bottom: 0,
-              child: SizedBox(
-                width: 200,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        RatingBar.builder(
-                          ignoreGestures: true,
-                          itemSize: 16,
-                          initialRating: rate! / 2.3,
-                          minRating: 1,
-                          direction: Axis.horizontal,
-                          allowHalfRating: true,
-                          itemCount: 5,
-                          itemPadding: const EdgeInsets.only(),
-                          itemBuilder: (context, _) => const Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                            size: 2,
-                          ),
-                          maxRating: 10,
-                          unratedColor: const Color(0xFF7D7D7D),
-                          onRatingUpdate: (rating) {
-                            print(rating);
-                          },
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          '$rate',
-                          style: const TextStyle(
-                              color: Colors.amber, fontSize: 14),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    const Text(
-                      'SS 1',
-                      style: TextStyle(color: Color(0xFF7D7D7D), fontSize: 14),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    const Text(
-                      'EPS 16',
-                      style: TextStyle(color: Color(0xFF7D7D7D), fontSize: 14),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            // Positioned(
+            //   bottom: 0,
+            //   child: SizedBox(
+            //     width: 200,
+            //     child: Row(
+            //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //       children: [
+            //         Row(
+            //           children: [
+            //             RatingBar.builder(
+            //               ignoreGestures: true,
+            //               itemSize: 16,
+            //               initialRating: rate! / 2.3,
+            //               minRating: 1,
+            //               direction: Axis.horizontal,
+            //               allowHalfRating: true,
+            //               itemCount: 5,
+            //               itemPadding: const EdgeInsets.only(),
+            //               itemBuilder: (context, _) => const Icon(
+            //                 Icons.star,
+            //                 color: Colors.amber,
+            //                 size: 2,
+            //               ),
+            //               maxRating: 10,
+            //               unratedColor: const Color(0xFF7D7D7D),
+            //               onRatingUpdate: (rating) {
+            //                 print(rating);
+            //               },
+            //             ),
+            //             const SizedBox(
+            //               width: 5,
+            //             ),
+            //             Text(
+            //               '$rate',
+            //               style: const TextStyle(
+            //                   color: Colors.amber, fontSize: 14),
+            //             ),
+            //           ],
+            //         ),
+            //         const SizedBox(
+            //           width: 5,
+            //         ),
+            //         const Text(
+            //           'SS 1',
+            //           style: TextStyle(color: Color(0xFF7D7D7D), fontSize: 14),
+            //         ),
+            //         const SizedBox(
+            //           width: 5,
+            //         ),
+            //         const Text(
+            //           'EPS 16',
+            //           style: TextStyle(color: Color(0xFF7D7D7D), fontSize: 14),
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

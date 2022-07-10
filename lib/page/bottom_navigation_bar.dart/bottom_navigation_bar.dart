@@ -31,25 +31,30 @@ class ButtomNavigationBar extends StatelessWidget {
         return Scaffold(
           body: child,
 
-          bottomNavigationBar: CurvedNavigationBar(
-            backgroundColor: const Color(0xFFDAA520),
-            color: const Color(0xFF242424),
-            index: tabsRouter.activeIndex,
-            items: const <Widget>[
-              Icon(CupertinoIcons.home, size: 30, color: Colors.white),
-              Icon(CupertinoIcons.star_circle_fill,
-                  size: 30, color: Colors.white),
-              Icon(Icons.live_tv, size: 30, color: Colors.white),
-              Icon(CupertinoIcons.heart_circle, size: 30, color: Colors.white),
-              Icon(CupertinoIcons.person_alt_circle,
-                  size: 30, color: Colors.white),
+          bottomNavigationBar: Stack(
+            children: [
+              CurvedNavigationBar(
+                backgroundColor: const Color(0xFF374452),
+                color: const Color(0xFF171C20),
+                index: tabsRouter.activeIndex,
+                items: const <Widget>[
+                  Icon(CupertinoIcons.home, size: 30, color: Colors.white),
+                  Icon(CupertinoIcons.star_circle_fill,
+                      size: 30, color: Colors.white),
+                  Icon(Icons.live_tv, size: 30, color: Colors.white),
+                  Icon(CupertinoIcons.heart_circle,
+                      size: 30, color: Colors.white),
+                  Icon(CupertinoIcons.person_alt_circle,
+                      size: 30, color: Colors.white),
+                ],
+                onTap: (index) async {
+                  //Handle button tap
+                  // await DefaultCacheManager().emptyCache();
+                  debugPrint('index:$index');
+                  tabsRouter.setActiveIndex(index);
+                },
+              ),
             ],
-            onTap: (index) async {
-              //Handle button tap
-              // await DefaultCacheManager().emptyCache();
-              debugPrint('index:$index');
-              tabsRouter.setActiveIndex(index);
-            },
           ),
 
           // BottomNavigationBar(
