@@ -21,6 +21,7 @@ _$_MoviesModel _$$_MoviesModelFromJson(Map<String, dynamic> json) =>
       overview: json['overview'] as String?,
       quality: json['quality'] as String?,
       rate: (json['rate'] as num?)?.toDouble(),
+      isFavourite: json['isFavourite'] as bool? ?? false,
       releaseDate: json['release_date'] as String?,
       thumbnailUrl: json['thumbnail_url'] as String?,
     );
@@ -38,6 +39,7 @@ Map<String, dynamic> _$$_MoviesModelToJson(_$_MoviesModel instance) =>
       'overview': instance.overview,
       'quality': instance.quality,
       'rate': instance.rate,
+      'isFavourite': instance.isFavourite,
       'release_date': instance.releaseDate,
       'thumbnail_url': instance.thumbnailUrl,
     };

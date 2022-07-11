@@ -38,6 +38,7 @@ mixin _$MoviesModel {
   String? get overview => throw _privateConstructorUsedError;
   String? get quality => throw _privateConstructorUsedError;
   double? get rate => throw _privateConstructorUsedError;
+  bool? get isFavourite => throw _privateConstructorUsedError;
   @JsonKey(name: 'release_date')
   String? get releaseDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'thumbnail_url')
@@ -66,6 +67,7 @@ abstract class $MoviesModelCopyWith<$Res> {
       String? overview,
       String? quality,
       double? rate,
+      bool? isFavourite,
       @JsonKey(name: 'release_date') String? releaseDate,
       @JsonKey(name: 'thumbnail_url') String? thumbnailUrl});
 }
@@ -91,6 +93,7 @@ class _$MoviesModelCopyWithImpl<$Res> implements $MoviesModelCopyWith<$Res> {
     Object? overview = freezed,
     Object? quality = freezed,
     Object? rate = freezed,
+    Object? isFavourite = freezed,
     Object? releaseDate = freezed,
     Object? thumbnailUrl = freezed,
   }) {
@@ -139,6 +142,10 @@ class _$MoviesModelCopyWithImpl<$Res> implements $MoviesModelCopyWith<$Res> {
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
               as double?,
+      isFavourite: isFavourite == freezed
+          ? _value.isFavourite
+          : isFavourite // ignore: cast_nullable_to_non_nullable
+              as bool?,
       releaseDate: releaseDate == freezed
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
@@ -170,6 +177,7 @@ abstract class _$$_MoviesModelCopyWith<$Res>
       String? overview,
       String? quality,
       double? rate,
+      bool? isFavourite,
       @JsonKey(name: 'release_date') String? releaseDate,
       @JsonKey(name: 'thumbnail_url') String? thumbnailUrl});
 }
@@ -197,6 +205,7 @@ class __$$_MoviesModelCopyWithImpl<$Res> extends _$MoviesModelCopyWithImpl<$Res>
     Object? overview = freezed,
     Object? quality = freezed,
     Object? rate = freezed,
+    Object? isFavourite = freezed,
     Object? releaseDate = freezed,
     Object? thumbnailUrl = freezed,
   }) {
@@ -245,6 +254,10 @@ class __$$_MoviesModelCopyWithImpl<$Res> extends _$MoviesModelCopyWithImpl<$Res>
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
               as double?,
+      isFavourite: isFavourite == freezed
+          ? _value.isFavourite
+          : isFavourite // ignore: cast_nullable_to_non_nullable
+              as bool?,
       releaseDate: releaseDate == freezed
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
@@ -272,6 +285,7 @@ class _$_MoviesModel implements _MoviesModel {
       this.overview,
       this.quality,
       this.rate,
+      this.isFavourite = false,
       @JsonKey(name: 'release_date') this.releaseDate,
       @JsonKey(name: 'thumbnail_url') this.thumbnailUrl})
       : _categories = categories;
@@ -316,6 +330,9 @@ class _$_MoviesModel implements _MoviesModel {
   @override
   final double? rate;
   @override
+  @JsonKey()
+  final bool? isFavourite;
+  @override
   @JsonKey(name: 'release_date')
   final String? releaseDate;
   @override
@@ -324,7 +341,7 @@ class _$_MoviesModel implements _MoviesModel {
 
   @override
   String toString() {
-    return 'MoviesModel(categories: $categories, enUrlSRT: $enUrlSRT, imageUrl: $imageUrl, khUrlSRT: $khUrlSRT, m3u8UrlServer1: $m3u8UrlServer1, m3u8UrlServer2: $m3u8UrlServer2, m3u8UrlServer3: $m3u8UrlServer3, movieName: $movieName, overview: $overview, quality: $quality, rate: $rate, releaseDate: $releaseDate, thumbnailUrl: $thumbnailUrl)';
+    return 'MoviesModel(categories: $categories, enUrlSRT: $enUrlSRT, imageUrl: $imageUrl, khUrlSRT: $khUrlSRT, m3u8UrlServer1: $m3u8UrlServer1, m3u8UrlServer2: $m3u8UrlServer2, m3u8UrlServer3: $m3u8UrlServer3, movieName: $movieName, overview: $overview, quality: $quality, rate: $rate, isFavourite: $isFavourite, releaseDate: $releaseDate, thumbnailUrl: $thumbnailUrl)';
   }
 
   @override
@@ -348,6 +365,8 @@ class _$_MoviesModel implements _MoviesModel {
             const DeepCollectionEquality().equals(other.quality, quality) &&
             const DeepCollectionEquality().equals(other.rate, rate) &&
             const DeepCollectionEquality()
+                .equals(other.isFavourite, isFavourite) &&
+            const DeepCollectionEquality()
                 .equals(other.releaseDate, releaseDate) &&
             const DeepCollectionEquality()
                 .equals(other.thumbnailUrl, thumbnailUrl));
@@ -368,6 +387,7 @@ class _$_MoviesModel implements _MoviesModel {
       const DeepCollectionEquality().hash(overview),
       const DeepCollectionEquality().hash(quality),
       const DeepCollectionEquality().hash(rate),
+      const DeepCollectionEquality().hash(isFavourite),
       const DeepCollectionEquality().hash(releaseDate),
       const DeepCollectionEquality().hash(thumbnailUrl));
 
@@ -395,6 +415,7 @@ abstract class _MoviesModel implements MoviesModel {
           final String? overview,
           final String? quality,
           final double? rate,
+          final bool? isFavourite,
           @JsonKey(name: 'release_date') final String? releaseDate,
           @JsonKey(name: 'thumbnail_url') final String? thumbnailUrl}) =
       _$_MoviesModel;
@@ -431,6 +452,8 @@ abstract class _MoviesModel implements MoviesModel {
   String? get quality => throw _privateConstructorUsedError;
   @override
   double? get rate => throw _privateConstructorUsedError;
+  @override
+  bool? get isFavourite => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'release_date')
   String? get releaseDate => throw _privateConstructorUsedError;

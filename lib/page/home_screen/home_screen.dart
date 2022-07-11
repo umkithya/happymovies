@@ -31,26 +31,6 @@ class HomeScreen extends StatelessWidget {
     return Obx(
       () => Scaffold(
         backgroundColor: const Color(0xFF141414),
-        // backgroundColor: Colors.white,
-        // appBar: AppBar(
-        //   leading: const Padding(
-        //     padding: EdgeInsets.only(left: 20),
-        //     child: Icon(
-        //       CupertinoIcons.search,
-        //       color: Colors.white,
-        //       size: 35,
-        //     ),
-        //   ),
-        //   title: Image.asset(
-        //     'asset/logo-one.png',
-        //     fit: BoxFit.fill,
-        //     height: 40,
-        //     width: 200,
-        //   ),
-        //   centerTitle: true,
-        //   elevation: 0,
-        //   backgroundColor: const Color(0xFF141414),
-        // ),
         body: Stack(
           children: [
             Container(
@@ -193,13 +173,15 @@ class HomeScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 8, left: 20, right: 0),
                     child: SizedBox(
-                      height: 50,
+                      height: 80,
                       child: ListView(
                         controller: ScrollController(),
                         // physics: const NeverScrollableScrollPhysics(),
                         scrollDirection: Axis.horizontal,
                         children: homeController.categoryList
                             .map((e) => customCategoryCard(
+                                  width: 150,
+                                  height: 80,
                                   imgUrl: e.imgUrl,
                                   color: e.color,
                                   onTap: () {
@@ -211,6 +193,7 @@ class HomeScreen extends StatelessWidget {
                                   text: e.title,
                                   textStyle: const TextStyle(
                                       color: Colors.white,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.bold),
                                 ))
                             .toList(),
@@ -226,7 +209,7 @@ class HomeScreen extends StatelessWidget {
                       child: CachedNetworkImage(
                         imageUrl:
                             'https://www.whatisthematrix.com/assets/images/desktopbanner.jpg',
-                        fit: BoxFit.cover,
+                        fit: BoxFit.fill,
                         memCacheHeight:
                             (55 * MediaQuery.of(context).devicePixelRatio)
                                 .round(),
@@ -471,113 +454,110 @@ class CustomMovieCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(right: 20),
-      child: SizedBox(
-        width: 150,
-        child: Stack(
-          children: [
-            Stack(
-              children: [
-                SizedBox(
-                  height: 230,
-                  width: 150,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: CachedNetworkImage(
-                      imageUrl: '$imgUrl',
-                      fit: BoxFit.fill,
-                      memCacheHeight:
-                          (150 * MediaQuery.of(context).devicePixelRatio)
-                              .round(),
-                      progressIndicatorBuilder:
-                          (context, url, downloadProgress) => ShimmerBox(
-                        height: 150,
-                        width: 100,
-                        isColor: true,
-                        color: Colors.red[100],
-                        baseColor: Colors.grey[400],
-                        highlightColor: Colors.white,
-                        radius: 10,
-                      ),
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
-                    ),
-                  ),
-                ),
-                hideFav! != true
-                    ? Positioned(
-                        right: 5,
-                        top: 5,
-                        child: Container(
-                          padding: const EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                            color: Colors.red,
-                            borderRadius: BorderRadius.circular(60),
-                          ),
-                          child: const Icon(
-                            Icons.favorite,
-                            color: Colors.white,
-                            size: 15,
-                          ),
-                        ))
-                    : Container()
-              ],
-            ),
-            Positioned(
-                bottom: 20,
-                child: SizedBox(
-                  width: 150,
-                  height: 22,
-                  child: AutoSizeText(
-                    title ?? '',
-                    style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white),
-                    minFontSize: 14,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                )),
-            Positioned(
-              bottom: 0,
-              child: SizedBox(
+      child: Stack(
+        children: [
+          Stack(
+            children: [
+              SizedBox(
+                height: 230,
                 width: 150,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    RatingBar.builder(
-                      ignoreGestures: true,
-                      itemSize: 16,
-                      initialRating: rate! / 2.3,
-                      minRating: 1,
-                      direction: Axis.horizontal,
-                      allowHalfRating: true,
-                      itemCount: 5,
-                      itemPadding: const EdgeInsets.only(),
-                      itemBuilder: (context, _) => const Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                        size: 2,
-                      ),
-                      maxRating: 10,
-                      unratedColor: const Color(0xFF7D7D7D),
-                      onRatingUpdate: (rating) {
-                        print(rating);
-                      },
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: CachedNetworkImage(
+                    imageUrl: '$imgUrl',
+                    fit: BoxFit.fill,
+                    memCacheHeight:
+                        (150 * MediaQuery.of(context).devicePixelRatio)
+                            .round(),
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) => ShimmerBox(
+                      height: 150,
+                      width: 100,
+                      isColor: true,
+                      color: Colors.red[100],
+                      baseColor: Colors.grey[400],
+                      highlightColor: Colors.white,
+                      radius: 10,
                     ),
-                    Text(
-                      '$rate',
-                      style: const TextStyle(
-                          color: Colors.amber,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500),
-                    )
-                  ],
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                  ),
                 ),
               ),
-            )
-          ],
-        ),
+              hideFav! != true
+                  ? Positioned(
+                      right: 5,
+                      top: 5,
+                      child: Container(
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(60),
+                        ),
+                        child: const Icon(
+                          Icons.favorite,
+                          color: Colors.white,
+                          size: 15,
+                        ),
+                      ))
+                  : Container()
+            ],
+          ),
+          Positioned(
+              bottom: 20,
+              child: SizedBox(
+                width: 150,
+                height: 22,
+                child: AutoSizeText(
+                  title ?? '',
+                  style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white),
+                  minFontSize: 14,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              )),
+          Positioned(
+            bottom: 0,
+            child: SizedBox(
+              width: 150,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  RatingBar.builder(
+                    ignoreGestures: true,
+                    itemSize: 16,
+                    initialRating: rate! / 2.3,
+                    minRating: 1,
+                    direction: Axis.horizontal,
+                    allowHalfRating: true,
+                    itemCount: 5,
+                    itemPadding: const EdgeInsets.only(),
+                    itemBuilder: (context, _) => const Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                      size: 2,
+                    ),
+                    maxRating: 10,
+                    unratedColor: const Color(0xFF7D7D7D),
+                    onRatingUpdate: (rating) {
+                      print(rating);
+                    },
+                  ),
+                  Text(
+                    '$rate',
+                    style: const TextStyle(
+                        color: Colors.amber,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500),
+                  )
+                ],
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

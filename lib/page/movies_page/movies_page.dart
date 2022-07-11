@@ -11,14 +11,14 @@ class MoviesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _homeController = Get.put(HomeScreenController());
-    final _moviesController = Get.put(MoviesController());
+    final homeController = Get.put(HomeScreenController());
+    final moviesController = Get.put(MoviesController());
 
     return Obx(
       () => Scaffold(
         backgroundColor: const Color(0xFF1B1B1B),
         appBar: customAppBar(
-            title: _moviesController.appBarTitle.value,
+            title: moviesController.appBarTitle.value,
             backgroundColor: const Color(0xFF141414),
             textStyle: const TextStyle(
               fontSize: 20,
@@ -36,7 +36,7 @@ class MoviesPage extends StatelessWidget {
             childAspectRatio: 117 / 200,
             mainAxisSpacing: 10.0,
           ),
-          children: _homeController.languageMovieHomeList
+          children: homeController.languageMovieHomeList
               .map((e) => SizedBox(
                     height: 200,
                     child: CustomMovieCard(

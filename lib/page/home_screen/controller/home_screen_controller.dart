@@ -158,9 +158,7 @@ class HomeScreenController extends GetxController {
             body: {"rate": 7, "start": "2019", "end": "2022"},
             isAuthorize: false)
         .then((value) {
-      // value['result'].map)(e){
 
-      // });
       popularList.clear();
       value['result'].map((value) {
         popularList.add(MoviesModel.fromJson(value));
