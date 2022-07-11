@@ -6,7 +6,7 @@ import 'package:happymovie/page/movies_page/movies_page.dart';
 import 'package:happymovie/page/video_play/video_player.dart';
 
 import '../../page/favorite_page/favorite_page.dart';
-import '../../page/movies_page/movie_rank_page/movie_rank_page.dart';
+import '../../page/movies_page/movie_rank_page.dart';
 import '../../page/profile/profile.dart';
 import '../../page/splash_screen/splash_screen.dart';
 import '../../page/tv_show.dart/tv_show_page.dart';

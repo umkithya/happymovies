@@ -20,7 +20,7 @@ import '../../page/home_screen/home_screen.dart' as _i9;
 import '../../page/home_screen/model/popular_movie_model/popular_movies_model/movies_model.dart'
     as _i14;
 import '../../page/login/login_page.dart' as _i3;
-import '../../page/movies_page/movie_rank_page/movie_rank_page.dart' as _i12;
+import '../../page/movies_page/movie_rank_page.dart' as _i12;
 import '../../page/movies_page/movies_page.dart' as _i11;
 import '../../page/profile/profile.dart' as _i8;
 import '../../page/splash_screen/splash_screen.dart' as _i1;
@@ -95,7 +95,7 @@ class AppRouter extends _i5.RootStackRouter {
     },
     MoviesRankRoute.name: (routeData) {
       return _i5.MaterialPageX<dynamic>(
-          routeData: routeData, child: _i12.MoviesRankPage());
+          routeData: routeData, child: const _i12.MoviesRankPage());
     }
   };
 
